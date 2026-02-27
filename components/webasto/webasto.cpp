@@ -187,11 +187,69 @@ void Webasto::KeepAlive() {
 }
 
 // ----- State lesen -----
-void Webasto::get_state_50_03() { /* hier Body aus H übernehmen */ }
-void Webasto::get_state_50_04() { /* hier Body aus H übernehmen */ }
-void Webasto::get_state_50_05() { /* hier Body aus H übernehmen */ }
-void Webasto::get_state_50_06() { /* hier Body aus H übernehmen */ }
-void Webasto::get_state_50_07() { /* hier Body aus H übernehmen */ }
+// ----- State lesen -----
+void Webasto::get_state_50_03() {
+    uint8_t dat[1]={0x50};
+    uint8_t rx[1];
+    SendBreak();
+    if(!tx_msg2(dat,1)){ ESP_LOGE(TAG,"get_state_50_03 !tx"); return; }
+    if(!rx_msg2(rx,1)){ ESP_LOGE(TAG,"get_state_50_03 !rx"); return; }
+
+    state_50_03.heat_request    = rx[0] & 0x01;
+    state_50_03.vent_request    = rx[0] & 0x02;
+    state_50_03.bit3            = rx[0] & 0x04;
+    state_50_03.bit4            = rx[0] & 0x08;
+    state_50_03.combustion_fan  = rx[0] & 0x10;
+    state_50_03.glowplug        = rx[0] & 0x20;
+    state_50_03.fuel_pump       = rx[0] & 0x40;
+    state_50_03.nozzle_heating  = rx[0] & 0x80;
+}
+
+void Webasto::get_state_50_04() {
+    uint8_t dat[1]={0x50};
+    uint8_t rx[3];
+    SendBreak();
+    if(!tx_msg2(dat,1)){ ESP_LOGE(TAG,"get_state_50_04 !tx"); return; }
+    if(!rx_msg2(rx,3)){ ESP_LOGE(TAG,"get_state_50_04 !rx"); return; }
+
+    state_50_04.glowplug       = rx[0];
+    state_50_04.fuel_pump      = rx[1];
+    state_50_04.combustion_fan = rx[2];
+}
+
+void Webasto::get_state_50_05() {
+    uint8_t dat[1]={0x50};
+    uint8_t rx[6];
+    SendBreak();
+    if(!tx_msg2(dat,1)){ ESP_LOGE(TAG,"get_state_50_05 !tx"); return; }
+    if(!rx_msg2(rx,6)){ ESP_LOGE(TAG,"get_state_50_05 !rx"); return; }
+
+    state_50_05.temperature      = ((rx[0]<<8)|rx[1]) * 0.1;
+    state_50_05.voltage          = ((rx[2]<<8)|rx[3]) * 0.01;
+    state_50_05.glowplug_resistance = ((rx[4]<<8)|rx[5]) * 0.1;
+}
+
+void Webasto::get_state_50_06() {
+    uint8_t dat[1]={0x50};
+    uint8_t rx[5];
+    SendBreak();
+    if(!tx_msg2(dat,1)){ ESP_LOGE(TAG,"get_state_50_06 !tx"); return; }
+    if(!rx_msg2(rx,5)){ ESP_LOGE(TAG,"get_state_50_06 !rx"); return; }
+
+    state_50_06.working_hours   = (rx[0]<<8 | rx[1]) * 0.1;
+    state_50_06.operating_hours = (rx[2]<<8 | rx[3]) * 0.1;
+    state_50_06.start_counter   = rx[4];
+}
+
+void Webasto::get_state_50_07() {
+    uint8_t dat[1]={0x50};
+    uint8_t rx[1];
+    SendBreak();
+    if(!tx_msg2(dat,1)){ ESP_LOGE(TAG,"get_state_50_07 !tx"); return; }
+    if(!rx_msg2(rx,1)){ ESP_LOGE(TAG,"get_state_50_07 !rx"); return; }
+
+    state_50_07.op_state = rx[0];
+}
 
 void Webasto::setup() {}
 
