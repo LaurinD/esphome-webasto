@@ -1,16 +1,15 @@
 #pragma once
 
 #include "esphome.h"
+#include "esphome/components/uart/uart.h"
 
 namespace esphome {
 namespace webasto {
 
-static const char *const TAG = "Webasto";
-
 class Webasto : public Component, public uart::UARTDevice {
 
  public:
-  Webasto(uart::UARTComponent *parent);
+  explicit Webasto(uart::UARTComponent *parent);
 
   void setup() override;
   void loop() override;
@@ -20,9 +19,6 @@ class Webasto : public Component, public uart::UARTDevice {
   void VentOn();
   void VentOn(uint8_t t_on_mins);
   void Off();
-
- protected:
-  uart::UARTComponent *_uart_comp;
 };
 
 }  // namespace webasto
