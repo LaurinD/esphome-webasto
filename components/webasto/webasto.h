@@ -31,9 +31,8 @@ class Webasto : public Component, public uart::UARTDevice {
     unsigned long keep_alive_time   = 0;
 
   public:
-    explicit Webasto(uart::IDFUARTComponent &parent) : uart::UARTDevice(&parent) {
-    // jetzt kompatibel mit ESPHome 2026
-    }
+    explicit Webasto(uart::IDFUARTComponent &parent) : uart::UARTDevice(&parent) {}
+
 
     struct state_50_03_t {
       bool heat_request = false;
