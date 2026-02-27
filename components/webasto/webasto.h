@@ -7,12 +7,11 @@ namespace esphome {
 namespace webasto {
 
 class Webasto : public Component, public uart::UARTDevice {
-
  public:
-  explicit Webasto(uart::UARTComponent *parent);
+  Webasto(uart::UARTComponent *parent);
 
   void setup() override;
-  void loop() override;
+  void loop() override
 
   void HeatOn();
   void HeatOn(uint8_t t_on_mins);
