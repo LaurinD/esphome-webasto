@@ -5,7 +5,7 @@
 namespace esphome {
 namespace webasto {
 
-static const char *const TAG = "Webasto";
+static const char *const TAG = "webasto";
 
 class Webasto : public Component, public uart::UARTDevice {
 
@@ -15,17 +15,17 @@ class Webasto : public Component, public uart::UARTDevice {
   void setup() override;
   void loop() override;
 
+  // ===== Control =====
   void HeatOn();
   void HeatOn(uint8_t t_on_mins);
   void VentOn();
   void VentOn(uint8_t t_on_mins);
   void Off();
 
+  // ===== States =====
   struct state_50_03_t {
     bool heat_request=false;
     bool vent_request=false;
-    bool bit3=false;
-    bool bit4=false;
     bool combustion_fan=false;
     bool glowplug=false;
     bool fuel_pump=false;
@@ -55,7 +55,7 @@ class Webasto : public Component, public uart::UARTDevice {
   } state_50_07;
 
  protected:
-  uart::UARTComponent *_uart_comp;
+  uart::UARTComponent *uart_;
 
   void SendBreak();
   bool tx_msg2(uint8_t* dat, uint8_t len);
