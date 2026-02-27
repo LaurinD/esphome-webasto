@@ -1,6 +1,8 @@
 #include "esphome.h"
 #include "esphome/components/uart/uart.h"
-using namespace esphome::webasto;
+
+using namespace esphome;          // optional
+using namespace esphome::webasto; // falls dein Webasto in diesem Namespace ist
 
 
 namespace esphome {
