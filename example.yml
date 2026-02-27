@@ -1,8 +1,7 @@
 esphome:
   name: espsharan
   friendly_name: espSharan
-  includes:
-    - webasto.h
+
 
 esp32:
   board: esp32dev
@@ -53,12 +52,9 @@ uart:
   parity: EVEN
   stop_bits: 1
 
-custom_component:
-- lambda: |-
-    auto my_custom = new Webasto(id(uart_bus));
-    return {my_custom};
-  components:
-    - id: my_custom_id
+external_components:
+  - source: github://LaurinD/esphome-webasto
+    components: [webasto]
     
 interval:
   - interval: 1s
