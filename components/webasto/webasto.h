@@ -1,3 +1,5 @@
+#pragma once
+
 #include "esphome.h"
 
 static const char *const TAG = "Webasto";
@@ -22,9 +24,11 @@ class Webasto : public Component, public UARTDevice {
     uint8_t         keep_alive_cmd  = 0;
     unsigned long keep_alive_time   = 0;
 
-  public:
+public:
+    ESP32ArduinoUARTComponent *_uart_comp;
+
     Webasto(ESP32ArduinoUARTComponent *parent) : UARTDevice(parent) {
-      _uart_comp = parent;
+        _uart_comp = parent;
     }
 
     struct state_50_03_t {
