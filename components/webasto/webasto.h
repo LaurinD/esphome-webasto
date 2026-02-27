@@ -31,8 +31,8 @@ class Webasto : public Component, public uart::UARTDevice {
     unsigned long keep_alive_time   = 0;
 
   public:
-    explicit Webasto(uart::UARTComponent *parent) : uart::UARTDevice(parent) {
-      // nothing else needed; UARTDevice stores the pointer internally
+    explicit Webasto(uart::IDFUARTComponent &parent) : uart::UARTDevice(&parent) {
+    // jetzt kompatibel mit ESPHome 2026
     }
 
     struct state_50_03_t {
