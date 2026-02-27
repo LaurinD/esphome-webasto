@@ -5,6 +5,10 @@ esphome:
 
 esp32:
   board: esp32dev
+  framework:
+    type: arduino
+
+
 
 logger:
   #level: DEBUG
@@ -19,6 +23,14 @@ wifi:
 ota:
   - platform: esphome
     password: "f6a56179190bf80773a1397cfaff6731"
+
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/LaurinD/esphome-webasto
+    components: [ webasto ]
+
 
 #api:
 
@@ -52,9 +64,7 @@ uart:
   parity: EVEN
   stop_bits: 1
 
-external_components:
-  - source: github://LaurinD/esphome-webasto
-    components: [webasto]
+
     
 interval:
   - interval: 1s
