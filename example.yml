@@ -5,7 +5,7 @@ esphome:
     - webasto.h
 
 esp32:
-  board: lolin32_lite
+  board: esp32dev
 
 logger:
   #level: DEBUG
@@ -14,14 +14,12 @@ logger:
   #baud_rate: 0 #disable logging over uart
   
 wifi:
-  networks:
-    - ssid: 'SSID'
-      password: 'PASSWORD'
-  ap:
-    ssid: "WebastoESPHome"
-    password: "12345678"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 
 ota:
+  - platform: esphome
+    password: "f6a56179190bf80773a1397cfaff6731"
 
 #api:
 
