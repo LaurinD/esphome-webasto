@@ -1,5 +1,7 @@
 #include "esphome.h"
 #include "esphome/components/uart/uart.h"
+using namespace esphome::webasto;
+
 
 namespace esphome {
 namespace webasto {
