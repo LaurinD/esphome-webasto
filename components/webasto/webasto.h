@@ -28,12 +28,10 @@ private:
     bool rx_msg2(uint8_t* dat, uint8_t len);
     void itob(uint8_t x, char *buf);
 
-    // Keep-alive
     uint8_t keep_alive_cmd = 0;
     unsigned long keep_alive_time = 0;
     unsigned long last_ok_rx;
 
-    // WBus constants
     const uint8_t WBUS_CLIENT_ADDR = 0x0F;
     const uint8_t WBUS_HOST_ADDR   = 0x04;
     const uint8_t WBUS_CMD_OFF     = 0x10;
@@ -41,7 +39,6 @@ private:
     const uint8_t WBUS_CMD_ON_VENT = 0x22;
     const uint8_t WBUS_CMD_CHK     = 0x44;
 
-    // State structs
 public:
     struct state_50_03_t { bool heat_request, vent_request, bit3, bit4, combustion_fan, glowplug, fuel_pump, nozzle_heating; } state_50_03;
     struct state_50_04_t { float glowplug, fuel_pump, combustion_fan; } state_50_04;
